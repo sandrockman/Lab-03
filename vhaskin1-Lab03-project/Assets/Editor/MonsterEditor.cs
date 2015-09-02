@@ -58,7 +58,8 @@ public class MonsterEditor : Editor {
 		{
 			//Increase the indent level by one
 			EditorGUI.indentLevel++;
-			//The variable VariableTransitionTime on the monsterScript should 
+			//The variable VariableTransitionTime on the monsterScript should equal 
+			//the setting the user picked for the toggle
 			//Reduce the indent level by one
 			EditorGUI.indentLevel--;
 
