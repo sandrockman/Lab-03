@@ -16,6 +16,19 @@ public class ObjectControllerEditor : Editor {
 	{
 		serializedObject.Update ();
 
+		SerializedProperty controller = serializedObject.FindProperty ("controllerObjects");
+
+		EditorGUILayout.PropertyField (controller);
+
+		if (controller.isExpanded) 
+		{
+			EditorGUILayout.PropertyField (controller.FindPropertyRelative ("Array.size"));
+			EditorGUI.indentLevel++;
+			for (int i = 0; i < controller.arraySize; i++) {
+				EditorGUILayout.PropertyField (controller.GetArrayElementAtIndex (i));
+			}
+			EditorGUI.indentLevel--;
+		}
 		serializedObject.ApplyModifiedProperties ();
 	}
 

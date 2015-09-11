@@ -24,20 +24,20 @@ public enum HealingTypes
 
 public enum HealingPickups
 {
-	CONTACT,
-	INTERACTION
+	COLLIDED,
+	INTERACTED
 }
 
 [System.Serializable]
-public class ObjectTypes : MonoBehaviour {
+public class ObjectTypes {
 	
 	public ObjectType type;
 	
 	public float breakablePoints;
 	
 	public bool solidMoving;
-	public Vector3 solidStart;
-	public Vector3 solidEnd;
+	public Transform solidStart;
+	public Transform solidEnd;
 	
 	public DamageTypes damageType;
 	public float damageAmount;
