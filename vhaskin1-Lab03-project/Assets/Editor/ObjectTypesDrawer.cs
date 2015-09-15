@@ -62,8 +62,21 @@ public class ObjectTypesDrawer : PropertyDrawer {
 
 			break;
 		case ObjectType.HEALING:
-			Rect healingRect = new Rect(position.x, position.y + 17, position.width, 17f);
-			EditorGUI.LabelField (healingRect, "There are not settings for a passable object.");
+			float offsetH = position.x;
+
+			Rect healingRect = new Rect(offsetH, position.y + 17, position.width / 2, 17f);
+			offsetH += position.width / 2;
+			EditorGUI.LabelField (healingRect, "This item will heal the player's");
+
+			Rect healingTypeRect = new Rect(offsetH, position.y + 17, 85f, 17f);
+			offsetH += 85f;
+			EditorGUI.PropertyField(healingTypeRect, healingType, GUIContent.none);
+
+			Rect byRect = new Rect(offsetH, position.y + 17, 35f, 17f);
+			offsetH += 35f;
+			EditorGUI.LabelField (byRect, "by");
+
+
 
 			break;
 		case ObjectType.PASSABLE:

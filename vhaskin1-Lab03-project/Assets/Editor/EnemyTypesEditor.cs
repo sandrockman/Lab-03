@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ArmourTypesEditor : MonoBehaviour {
+public class EnemyTypesEditor : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
