@@ -53,6 +53,6 @@ public class EnemyTypes {
 	public AttackType attackType;
 	public AttackDamage attackDamage;
 	public SpellType spellType;
-	public WeaponType weaponType;
-	public ArmourType armourType;
+	public WeaponType[] weaponType;
+	public ArmourType[] armourType;
 }

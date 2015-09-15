@@ -34,7 +34,7 @@ public class ObjectTypesDrawer : PropertyDrawer {
 
 		EditorGUI.PropertyField (objectTypeDisplay, objectType, GUIContent.none);
 
-		Debug.Log (objectType.enumValueIndex);
+		//Debug.Log (objectType.enumValueIndex);
 
 		switch ((ObjectType)objectType.enumValueIndex) 
 		{
@@ -64,19 +64,33 @@ public class ObjectTypesDrawer : PropertyDrawer {
 		case ObjectType.HEALING:
 			float offsetH = position.x;
 
-			Rect healingRect = new Rect(offsetH, position.y + 17, position.width / 2, 17f);
-			offsetH += position.width / 2;
+			Rect healingRect = new Rect(offsetH, position.y + 17, 195f, 17f);
+			offsetH += 180f;
 			EditorGUI.LabelField (healingRect, "This item will heal the player's");
 
 			Rect healingTypeRect = new Rect(offsetH, position.y + 17, 85f, 17f);
-			offsetH += 85f;
+			offsetH += 70f;
 			EditorGUI.PropertyField(healingTypeRect, healingType, GUIContent.none);
 
 			Rect byRect = new Rect(offsetH, position.y + 17, 35f, 17f);
-			offsetH += 35f;
+			offsetH += 20f;
 			EditorGUI.LabelField (byRect, "by");
 
+			Rect healingAmountRect = new Rect(offsetH, position.y + 17, 50f, 17f);
+			offsetH = position.x;
+			EditorGUI.PropertyField(healingAmountRect, healingAmount, GUIContent.none);
 
+			//next line down
+			Rect nextHealingRect = new Rect(offsetH, position.y + 34, 50f, 17f);
+			offsetH += 35f;
+			EditorGUI.LabelField(nextHealingRect, "if it is");
+
+			Rect healingPickupRect = new Rect(offsetH, position.y + 34, 110f, 17f);
+			offsetH += 100f;
+			EditorGUI.PropertyField(healingPickupRect, healingPickupType, GUIContent.none);
+
+			Rect finalHealingRect = new Rect(offsetH, position.y + 34, 45f, 17f);
+			EditorGUI.LabelField(finalHealingRect, "with.");
 
 			break;
 		case ObjectType.PASSABLE:
