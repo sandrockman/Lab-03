@@ -5,7 +5,7 @@ using UnityEditor;
 [CustomPropertyDrawer(typeof(EnemyTypes))]
 public class EnemyTypesEditor : PropertyDrawer {
 
-	float extraHeight = 70f;
+	float extraHeight = 102f;
 
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 	{
@@ -19,6 +19,7 @@ public class EnemyTypesEditor : PropertyDrawer {
 
 		SerializedProperty faction = property.FindPropertyRelative ("faction");
 		SerializedProperty attackType = property.FindPropertyRelative ("attackType");
+		SerializedProperty attackDamage = property.FindPropertyRelative ("attackDamage");
 
 		SerializedProperty spellType = property.FindPropertyRelative ("spellType");
 		SerializedProperty weaponType = property.FindPropertyRelative ("weaponType");
@@ -65,6 +66,15 @@ public class EnemyTypesEditor : PropertyDrawer {
 		Rect atkTypeRect = new Rect (offsetVar, position.y + 34, position.width / 3, 17f);
 		offsetVar = position.x;
 		EditorGUI.PropertyField (atkTypeRect, attackType, GUIContent.none);
+
+		//next line
+		Rect atkDmgDataRect = new Rect (offsetVar, position.y + 51, 100f, 17f);
+		offsetVar += 90f;
+		EditorGUI.LabelField (atkDmgDataRect, "Atk Dmg Type:");
+		
+		Rect atkDmgRect = new Rect (offsetVar, position.y + 51, position.width / 3, 17f);
+		offsetVar = position.x;
+		EditorGUI.PropertyField (atkDmgRect, attackDamage, GUIContent.none);
 
 		//Debug.Log (objectType.enumValueIndex);
 		/*
