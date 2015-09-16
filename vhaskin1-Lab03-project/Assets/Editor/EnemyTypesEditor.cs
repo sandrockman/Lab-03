@@ -5,7 +5,7 @@ using UnityEditor;
 [CustomPropertyDrawer(typeof(EnemyTypes))]
 public class EnemyTypesEditor : PropertyDrawer {
 
-	float extraHeight = 102f;
+	float extraHeight = 51f;
 
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 	{
@@ -42,13 +42,16 @@ public class EnemyTypesEditor : PropertyDrawer {
 		offsetVar += position.width / 4;
 		EditorGUI.PropertyField (healthRect, health, GUIContent.none);
 
-		Rect manaNameRect = new Rect (offsetVar, position.y + 17, 55f, 17f);
-		offsetVar += 45f;
-		EditorGUI.LabelField (manaNameRect, "Mana:");
+		if ((AttackDamage)attackDamage.enumValueIndex != AttackDamage.PHYSICAL) 
+		{
+			Rect manaNameRect = new Rect (offsetVar, position.y + 17, 55f, 17f);
+			offsetVar += 45f;
+			EditorGUI.LabelField (manaNameRect, "Mana:");
 
-		Rect manaRect = new Rect (offsetVar, position.y + 17, position.width / 4, 17f);
+			Rect manaRect = new Rect (offsetVar, position.y + 17, position.width / 4, 17f);
+			EditorGUI.PropertyField (manaRect, mana, GUIContent.none);
+		}
 		offsetVar = position.x;
-		EditorGUI.PropertyField (manaRect, mana, GUIContent.none);
 
 		//next line
 		Rect factionDataRect = new Rect (offsetVar, position.y + 34, 70f, 17f);
@@ -72,33 +75,45 @@ public class EnemyTypesEditor : PropertyDrawer {
 		offsetVar += 90f;
 		EditorGUI.LabelField (atkDmgDataRect, "Atk Dmg Type:");
 		
-		Rect atkDmgRect = new Rect (offsetVar, position.y + 51, position.width / 3, 17f);
-		offsetVar = position.x;
+		Rect atkDmgRect = new Rect (offsetVar, position.y + 51, 90f, 17f);
+		offsetVar += 80f;
 		EditorGUI.PropertyField (atkDmgRect, attackDamage, GUIContent.none);
 
-		//Debug.Log (objectType.enumValueIndex);
-		/*
-		switch ((ObjectType)objectType.enumValueIndex) 
+		if ((AttackDamage)attackDamage.enumValueIndex != AttackDamage.PHYSICAL) 
 		{
-		case ObjectType.BREAKABLE:
-
-			break;
-		case ObjectType.DAMAGING:
-
-			break;
-		case ObjectType.HEALING:
-
-			break;
-		case ObjectType.PASSABLE:
-
-			break;
-		case ObjectType.SOLID:
-			break;
-		default:
-			Debug.Log("EnemyTypeDrawer switch goof. A-hyuck.");
-			break;
+			Rect spellDataRect = new Rect (offsetVar, position.y + 51, 85f, 17f);
+			offsetVar += 75f;
+			EditorGUI.LabelField (spellDataRect, "Spell Type:");
+		
+			Rect spellRect = new Rect (offsetVar, position.y + 51, 90f, 17f);
+			EditorGUI.PropertyField (spellRect, spellType, GUIContent.none);
 		}
-		//*/
+		offsetVar = position.x;
+
+		EditorGUILayout.PropertyField (armourType);
+		//*
+		if (armourType.isExpanded) 
+		{
+			EditorGUILayout.PropertyField (armourType.FindPropertyRelative ("Array.size"));
+			EditorGUI.indentLevel++;
+			for (int i = 0; i < armourType.arraySize; i++) {
+				EditorGUILayout.PropertyField (armourType.GetArrayElementAtIndex (i));
+			}
+			EditorGUI.indentLevel--;
+		}
+
+		EditorGUILayout.PropertyField (weaponType);
+		//*
+		if (weaponType.isExpanded) 
+		{
+			EditorGUILayout.PropertyField (weaponType.FindPropertyRelative ("Array.size"));
+			EditorGUI.indentLevel++;
+			for (int i = 0; i < weaponType.arraySize; i++) {
+				EditorGUILayout.PropertyField (weaponType.GetArrayElementAtIndex (i));
+			}
+			EditorGUI.indentLevel--;
+		}
+
 		EditorGUI.EndProperty ();
 	}
 

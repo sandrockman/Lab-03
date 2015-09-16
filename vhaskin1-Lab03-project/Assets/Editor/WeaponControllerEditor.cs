@@ -1,25 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
-	
-[CustomEditor(typeof(EnemyController))]
-public class EnemyControllerEditor : Editor {
-		
-	EnemyController controllerScript;
 
+[CustomEditor(typeof(WeaponController))]
+public class WeaponControllerEditor : Editor {
+	
+	WeaponController controllerScript;
+	
 	void Awake()
 	{
-		controllerScript = (EnemyController)target;
+		controllerScript = (WeaponController)target;
 	}
-		
+	
 	public override void OnInspectorGUI()
 	{
 		serializedObject.Update ();
-			
-		SerializedProperty controller = serializedObject.FindProperty ("enemyObjects");
-
+		
+		SerializedProperty controller = serializedObject.FindProperty ("weaponObjects");
+		
 		EditorGUILayout.PropertyField (controller);
-			
+		
 		if (controller.isExpanded) 
 		{
 			EditorGUILayout.PropertyField (controller.FindPropertyRelative ("Array.size"));
@@ -29,13 +29,13 @@ public class EnemyControllerEditor : Editor {
 			}
 			EditorGUI.indentLevel--;
 		}
-
-		if (GUILayout.Button ("Print Enemy Array to Console")) 
+		
+		if (GUILayout.Button ("Print Weapon Array to Console")) 
 		{
 			controllerScript.PrintArray ();
 		}
 		serializedObject.ApplyModifiedProperties ();
 	}
-
-
+	
+	
 }
